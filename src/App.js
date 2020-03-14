@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 // MUI
 import { Container } from '@material-ui/core';
@@ -11,6 +12,7 @@ import store from './redux/store';
 
 // Screens
 import Home from './screens/Home';
+import BookDetails from './screens/BookDetails';
 
 const useStyles = makeStyles({
   root: {
@@ -24,7 +26,14 @@ function App() {
     <Provider store={store}>
       <UserProvider>
         <Container className={classes.root}>
-          <Home></Home>
+          <Switch>
+            <Route exact path="/">
+              <Home></Home>
+            </Route>
+            <Route exact path="/books/:bookId">
+              <BookDetails></BookDetails>
+            </Route>
+          </Switch>
         </Container>
       </UserProvider>
     </Provider>

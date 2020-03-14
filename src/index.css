@@ -1,5 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #b8dcde;
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
 }
 
 ul {

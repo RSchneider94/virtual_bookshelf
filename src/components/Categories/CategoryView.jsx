@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from 'react-slick';
-import BookCover from './BookCover';
+import BookCover from '../Books/BookCover';
 
 const useStyles = makeStyles({
   title: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Category({ categoryKey, categoryName }) {
+export default function CategoryView({ categoryKey, categoryName }) {
   const classes = useStyles();
 
   const booksInCategory = useSelector(state => {
@@ -29,14 +30,16 @@ export default function Category({ categoryKey, categoryName }) {
   });
 
   const bookElements = booksInCategory.map(book => (
-    <BookCover key={book.id} title={book.title}></BookCover>
+    <BookCover key={book.id} id={book.id} title={book.title}></BookCover>
   ));
 
   return (
     <Box>
-      <Typography variant="h4" component="h2" className={classes.title}>
-        {categoryName}
-      </Typography>
+      <Link to={`/categories/${categoryKey}`}>
+        <Typography variant="h4" component="h2" className={classes.title}>
+          {categoryName}
+        </Typography>
+      </Link>
       {bookElements.length ? (
         <Slider
           infinite={false}

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Category from '../components/Home/Category';
+import CategoryView from '../components/Categories/CategoryView';
 
 const useStyles = makeStyles({
   root: {}
@@ -16,7 +16,7 @@ export default function Home() {
 
   for (const [categoryKey, value] of Object.entries(categories)) {
     categoriesSections.push(
-      <Category
+      <CategoryView
         key={categoryKey}
         categoryKey={categoryKey}
         categoryName={value}

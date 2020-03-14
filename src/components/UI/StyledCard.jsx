@@ -7,7 +7,8 @@ const StyledCard = withStyles({
     alignItems: 'center',
     justifyContent: 'center',
     width: '220px',
-    height: '300px'
+    height: '300px',
+    cursor: 'pointer'
   }
 })(Card);
 
