@@ -3,8 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const StyledCardHeader = withStyles({
   root: {
-    textAlign: 'center',
-    borderBottom: '1px solid #b8dcde'
+    textAlign: 'center'
   }
 })(CardHeader);
 

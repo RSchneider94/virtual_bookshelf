@@ -3,6 +3,9 @@ import { withStyles } from '@material-ui/core/styles';
 
 const StyledCard = withStyles({
   root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '220px',
     height: '300px'
   }

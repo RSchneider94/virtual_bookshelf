@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
-import Book from './Book';
+import Slider from 'react-slick';
+import BookCover from './BookCover';
 
 const useStyles = makeStyles({
   title: {
@@ -13,11 +13,6 @@ const useStyles = makeStyles({
   },
   noBooksText: {
     textAlign: 'center'
-  },
-  booksContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between'
   }
 });
 
@@ -34,7 +29,7 @@ export default function Category({ categoryKey, categoryName }) {
   });
 
   const bookElements = booksInCategory.map(book => (
-    <Book key={book.id} {...book}></Book>
+    <BookCover key={book.id} title={book.title}></BookCover>
   ));
 
   return (
@@ -43,7 +38,39 @@ export default function Category({ categoryKey, categoryName }) {
         {categoryName}
       </Typography>
       {bookElements.length ? (
-        <Box className={classes.booksContainer}>{bookElements}</Box>
+        <Slider
+          infinite={false}
+          slidesToShow={4}
+          slidesToScroll={1}
+          responsive={[
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                initialSlide: 2
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]}
+        >
+          {bookElements}
+        </Slider>
       ) : (
         <Typography variant="body1" className={classes.noBooksText}>
           No books for this category. What about creating one?{' '}
