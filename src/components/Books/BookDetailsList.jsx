@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { Typography, FormControl, Select, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -11,9 +12,26 @@ const useStyles = makeStyles({
   }
 });
 
-export default function BookDetailsList(props) {
-  const { creationDate, author, category, description } = props;
+export default function BookDetailsList({
+  creationDate,
+  author,
+  description,
+  selectCategory,
+  handleCategorySelect
+}) {
   const classes = useStyles();
+
+  // Categories from state to fill out the select
+  const categories = useSelector(state => state.categories);
+  const categoriesOptions = [];
+  for (const [categoryKey, categoryValue] of Object.entries(categories)) {
+    categoriesOptions.push(
+      <MenuItem key={categoryKey} value={categoryValue}>
+        {categoryValue}
+      </MenuItem>
+    );
+  }
+
   return (
     <ul>
       <li className={classes.listItem}>
@@ -32,9 +50,11 @@ export default function BookDetailsList(props) {
         <Typography variant="body1" className={classes.label}>
           Category:
         </Typography>
-        <Typography variant="body2">
-          {category ? category : 'No Category'}
-        </Typography>
+        <FormControl>
+          <Select value={selectCategory} onChange={handleCategorySelect}>
+            {categoriesOptions}
+          </Select>
+        </FormControl>
       </li>
       <li className={classes.listItem}>
         <Typography variant="body1" className={classes.label}>

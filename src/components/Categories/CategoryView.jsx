@@ -8,12 +8,14 @@ import BookCover from '../Books/BookCover';
 
 const useStyles = makeStyles({
   title: {
-    textAlign: 'center',
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    color: '#fff',
+    textAlign: 'center'
   },
   noBooksText: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#fff'
   }
 });
 

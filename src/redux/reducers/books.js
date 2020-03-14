@@ -94,6 +94,13 @@ const initialState = [
 
 export default function books(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.CHANGE_BOOK_CATEGORY:
+      return state.map(book => {
+        if (book.id === action.payload.bookId) {
+          return { ...book, category: action.payload.newCategory };
+        }
+        return book;
+      });
     default:
       return state;
   }

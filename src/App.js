@@ -10,6 +10,9 @@ import { Provider } from 'react-redux';
 import UserProvider from './context/userContext';
 import store from './redux/store';
 
+// UI Components
+import Header from './components/UI/Header';
+
 // Screens
 import Home from './screens/Home';
 import BookDetails from './screens/BookDetails';
@@ -25,6 +28,7 @@ function App() {
   return (
     <Provider store={store}>
       <UserProvider>
+        <Header></Header>
         <Container className={classes.root}>
           <Switch>
             <Route exact path="/">
