@@ -1,17 +1,28 @@
-import React from 'react'
-import { Box } from '@material-ui/core';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Category from '../components/Home/Category';
+
 const useStyles = makeStyles({
-  root: {
-  }
+  root: {}
 });
 
 export default function Home() {
   const classes = useStyles();
-  return (
-    <Box>
-      X
-    </Box>
-  )
+  const categories = useSelector(state => state.categories);
+
+  const categoriesSections = [];
+
+  for (const [categoryKey, value] of Object.entries(categories)) {
+    categoriesSections.push(
+      <Category
+        key={categoryKey}
+        categoryKey={categoryKey}
+        categoryName={value}
+      />
+    );
+  }
+
+  return categoriesSections;
 }

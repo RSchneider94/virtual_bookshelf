@@ -1,9 +1,16 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+
+// MUI
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+// State
+import { Provider } from 'react-redux';
 import UserProvider from './context/userContext';
 import store from './redux/store';
+
+// Screens
+import Home from './screens/Home';
 
 const useStyles = makeStyles({
   root: {
@@ -16,7 +23,9 @@ function App() {
   return (
     <Provider store={store}>
       <UserProvider>
-        <Container className={classes.root}>Hello</Container>
+        <Container className={classes.root}>
+          <Home></Home>
+        </Container>
       </UserProvider>
     </Provider>
   );
