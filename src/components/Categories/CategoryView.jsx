@@ -25,10 +25,10 @@ export default function CategoryView({ categoryKey, categoryName }) {
   const booksInCategory = useSelector(state => {
     if (categoryKey === 'noCategory') {
       return state.books.filter(
-        book => book.category === null || book.category === categoryKey
+        book => book.category === null || book.category === categoryName
       );
     }
-    return state.books.filter(book => book.category === categoryKey);
+    return state.books.filter(book => book.category === categoryName);
   });
 
   const bookElements = booksInCategory.map(book => (
