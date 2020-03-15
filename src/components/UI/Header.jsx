@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -19,9 +20,11 @@ export default function Header() {
 
   return (
     <Box className={classes.header}>
-      <Typography variant="h4" className={classes.title}>
-        Virtual Bookshelf
-      </Typography>
+      <Link to="/">
+        <Typography variant="h4" className={classes.title}>
+          Virtual Bookshelf
+        </Typography>
+      </Link>
     </Box>
   );
 }
