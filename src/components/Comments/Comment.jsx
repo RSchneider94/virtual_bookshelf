@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Card,
   CardContent,
@@ -8,6 +9,9 @@ import {
 } from '@material-ui/core';
 import { Edit, Delete } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+
+// Actions
+import { showConfirmationModal } from '../../redux/actions/uiActions';
 
 const useStyles = makeStyles({
   container: {
@@ -24,7 +28,19 @@ const useStyles = makeStyles({
 
 export default function Comment(props) {
   const classes = useStyles();
-  const { author, creationDate, body } = props;
+  const { id, author, creationDate, body } = props;
+  const dispatch = useDispatch();
+
+  const handleDeleteCommentConfirmClick = itemId => () => {
+    dispatch(
+      showConfirmationModal(
+        'Comment Deletion',
+        'Are you sure you want to remove this comment?',
+        'comment',
+        itemId
+      )
+    );
+  };
 
   return (
     <Card className={classes.container}>
@@ -40,7 +56,11 @@ export default function Comment(props) {
         <IconButton title="Edit this comment" aria-label="edit the comment">
           <Edit></Edit>
         </IconButton>
-        <IconButton title="Delete this comment" aria-label="delete the comment">
+        <IconButton
+          title="Delete this comment"
+          aria-label="delete the comment"
+          onClick={handleDeleteCommentConfirmClick(id)}
+        >
           <Delete></Delete>
         </IconButton>
       </CardActions>

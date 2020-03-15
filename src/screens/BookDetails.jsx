@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Box, IconButton } from '@material-ui/core';
+import { Box, IconButton, Typography } from '@material-ui/core';
 import { Edit, Delete } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Actions
-import { changeBookCategory } from '../redux/actions/books';
+import { changeBookCategory } from '../redux/actions/booksActions';
+import { showConfirmationModal } from '../redux/actions/uiActions';
 
 // Components
 import BookCover from '../components/Books/BookCover';
@@ -47,6 +48,10 @@ const useStyles = makeStyles(theme => ({
     marginTop: 20,
     borderTop: '1px solid black',
     width: '100%'
+  },
+  noBookWithIdText: {
+    textAlign: 'center',
+    color: '#fff'
   }
 }));
 
@@ -62,7 +67,9 @@ export default function BookDetails() {
 
   // And their comments
   const bookComments = useSelector(state =>
-    state.comments.filter(comment => comment.parentId === parseInt(bookId))
+    state.comments.filter(
+      comment => comment.parentId === parseInt(bookId) && !comment.deleted
+    )
   );
 
   // Used for selector element to change the book's category
@@ -74,7 +81,25 @@ export default function BookDetails() {
     dispatch(changeBookCategory(book.id, event.target.value));
   };
 
+  const handleDeleteBookConfirmClick = itemId => () => {
+    dispatch(
+      showConfirmationModal(
+        'Book Deletion',
+        'Are you sure you want to remove this book?',
+        'book',
+        itemId
+      )
+    );
+  };
+
   if (book) {
+    if (book.deleted) {
+      return (
+        <Typography variant="body1" className={classes.noBookWithIdText}>
+          Sorry! This book is currently deleted. Redirecting you to home page.
+        </Typography>
+      );
+    }
     return (
       <Box className={classes.container}>
         <BookCover id={book.id} title={book.title}></BookCover>
@@ -86,12 +111,13 @@ export default function BookDetails() {
           ></BookDetailsList>
         </Box>
         <Box className={classes.bookActions}>
-          <IconButton title="Edit this comment" aria-label="edit the comment">
+          <IconButton title="Edit this book" aria-label="edit the book">
             <Edit></Edit>
           </IconButton>
           <IconButton
-            title="Delete this comment"
-            aria-label="delete the comment"
+            title="Delete this book"
+            aria-label="delete the book"
+            onClick={handleDeleteBookConfirmClick(book.id)}
           >
             <Delete></Delete>
           </IconButton>
@@ -104,10 +130,12 @@ export default function BookDetails() {
   }
   return (
     <Box className={classes.container}>
-      Sorry, no books found with the provided ID!{' '}
-      <span role="img" aria-label="emoji">
-        😔
-      </span>
+      <Typography variant="body1" className={classes.noBookWithIdText}>
+        Sorry, no books found with the provided ID!
+        <span role="img" aria-label="emoji">
+          😔
+        </span>
+      </Typography>
     </Box>
   );
 }

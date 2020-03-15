@@ -12,6 +12,8 @@ import store from './redux/store';
 
 // UI Components
 import Header from './components/UI/Header';
+import ConfirmationModal from './components/UI/ConfirmationModal';
+import FeedbackPopup from './components/UI/FeedbackPopup';
 
 // Screens
 import Home from './screens/Home';
@@ -30,6 +32,8 @@ function App() {
       <UserProvider>
         <Header></Header>
         <Container className={classes.root}>
+          <ConfirmationModal></ConfirmationModal>
+          <FeedbackPopup></FeedbackPopup>
           <Switch>
             <Route exact path="/">
               <Home></Home>

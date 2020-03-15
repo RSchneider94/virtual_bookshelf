@@ -1,4 +1,4 @@
-import { actionTypes } from '../actions/books';
+import { actionTypes } from '../actions/booksActions';
 const initialState = [
   {
     id: 0,
@@ -98,6 +98,13 @@ export default function books(state = initialState, action) {
       return state.map(book => {
         if (book.id === action.payload.bookId) {
           return { ...book, category: action.payload.newCategory };
+        }
+        return book;
+      });
+    case actionTypes.REMOVE_BOOK:
+      return state.map(book => {
+        if (book.id === action.payload.bookId) {
+          return { ...book, deleted: true };
         }
         return book;
       });

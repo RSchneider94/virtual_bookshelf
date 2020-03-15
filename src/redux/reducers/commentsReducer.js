@@ -1,4 +1,4 @@
-import { actionTypes } from '../actions/comments';
+import { actionTypes } from '../actions/commentsActions';
 const initialState = [
   {
     id: 0,
@@ -31,6 +31,13 @@ const initialState = [
 
 export default function comments(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.REMOVE_COMMENT:
+      return state.map(comment => {
+        if (comment.id === action.payload.commentId) {
+          return { ...comment, deleted: true };
+        }
+        return comment;
+      });
     default:
       return state;
   }
