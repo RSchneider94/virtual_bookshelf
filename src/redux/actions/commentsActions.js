@@ -4,10 +4,13 @@ export const actionTypes = {
   REMOVE_COMMENT: 'REMOVE_COMMENT'
 };
 
-export const removeComment = commentId => ({
-  // TODO: make with thunk
-  type: actionTypes.REMOVE_COMMENT,
-  payload: {
-    commentId
-  }
-});
+export const removeComment = commentId => {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.REMOVE_COMMENT,
+      payload: {
+        commentId
+      }
+    });
+  };
+};
