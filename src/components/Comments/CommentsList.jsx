@@ -1,40 +1,61 @@
 import React from 'react';
-import { Box, Typography, Button } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import { AddComment } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Components
 import Comment from './Comment';
+import StyledText from '../UI/StyledText';
 
-const useStyles = makeStyles({
-  noCommentsText: {
-    marginTop: 10
+const useStyles = makeStyles(theme => ({
+  container: {
+    position: 'relative'
+  },
+  commentsSection: {
+    marginTop: 30
+  },
+  addCommentButton: {
+    marginTop: 10,
+    [theme.breakpoints.up('md')]: {
+      position: 'absolute',
+      top: 10,
+      right: 0,
+      marginTop: 0
+    }
   }
-});
+}));
 
 export default function CommentsList({ bookComments }) {
   const classes = useStyles();
 
   return (
-    <Box>
-      <Typography variant="h6" component="h2">
+    <Box className={classes.container}>
+      <StyledText variant="h6" component="h2" color="#fff">
         What people are saying about this book?
-      </Typography>
-      <Button variant="contained" startIcon={<AddComment />}>
-        Share your thought!
+      </StyledText>
+      <Button
+        variant="contained"
+        startIcon={<AddComment />}
+        className={classes.addCommentButton}
+      >
+        {bookComments.length
+          ? 'Share your thought too!'
+          : "Wanna be the first to comment something? Don't be shy!"}
       </Button>
-      {bookComments.length ? (
-        bookComments.map(comment => (
-          <Comment key={comment.id} {...comment}></Comment>
-        ))
-      ) : (
-        <Typography variant="body1" className={classes.noCommentsText}>
-          No comments for this book yet. Wanna share your thoughts?{' '}
-          <span role="img" aria-label="emoji">
-            😊
-          </span>
-        </Typography>
-      )}
+      <Box className={classes.commentsSection}>
+        {bookComments.length ? (
+          bookComments.map(comment => (
+            <Comment key={comment.id} {...comment}></Comment>
+          ))
+        ) : (
+          <StyledText variant="body1" color="#fff">
+            No comments for this book yet. Wanna share your thoughts?{' '}
+            <span role="img" aria-label="emoji">
+              😊
+            </span>
+          </StyledText>
+        )}
+      </Box>
     </Box>
   );
 }

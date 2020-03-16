@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+// Components
+import Logo from '../UI/Logo';
 
 const useStyles = makeStyles({
   header: {
@@ -21,9 +24,7 @@ export default function Header() {
   return (
     <Box className={classes.header}>
       <Link to="/">
-        <Typography variant="h4" className={classes.title}>
-          Virtual Bookshelf
-        </Typography>
+        <Logo></Logo>
       </Link>
     </Box>
   );

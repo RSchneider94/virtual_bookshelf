@@ -1,11 +1,25 @@
+import React from 'react';
 import { Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const StyledText = withStyles(({ textColor, alignment }) => ({
+const useStyles = makeStyles({
   root: {
-    color: textColor,
-    textAlign: alignment
+    color: props => props.color,
+    textAlign: props => props.textAlign || undefined
   }
-}))(Typography);
+});
 
-export default StyledText;
+export default function StyledText(props) {
+  const { variant, component, children, ...styleProps } = props;
+
+  const classes = useStyles(styleProps);
+  return (
+    <Typography
+      variant={variant}
+      component={component}
+      className={classes.root}
+    >
+      {children}
+    </Typography>
+  );
+}

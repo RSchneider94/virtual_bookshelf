@@ -39,9 +39,6 @@ export default function ConfirmationModal() {
         showFeedbackPopup('success', 'The book was successfully removed!')
       );
       handleClose();
-      setTimeout(() => {
-        window.location.pathname = '';
-      }, 5000);
     } else if (itemToDelete === 'comment') {
       dispatch(removeComment(itemId));
       dispatch(

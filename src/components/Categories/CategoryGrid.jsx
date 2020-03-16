@@ -11,7 +11,8 @@ const useStyles = makeStyles({
     marginTop: 20,
     marginBottom: 20,
     color: '#fff',
-    textAlign: 'center'
+    textAlign: 'center',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.5)'
   },
   noBooksText: {
     textAlign: 'center',
@@ -25,10 +26,14 @@ export default function CategoryGrid({ categoryKey, categoryName }) {
   const booksInCategory = useSelector(state => {
     if (categoryKey === 'noCategory') {
       return state.books.filter(
-        book => book.category === null || book.category === categoryName
+        book =>
+          !book.deleted &&
+          (book.category === null || book.category === categoryName)
       );
     }
-    return state.books.filter(book => book.category === categoryName);
+    return state.books.filter(
+      book => !book.deleted && book.category === categoryName
+    );
   });
 
   const bookElements = booksInCategory.map(book => (

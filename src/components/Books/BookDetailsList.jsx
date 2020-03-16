@@ -7,7 +7,11 @@ const useStyles = makeStyles({
   listItem: {
     marginBottom: 4
   },
+  text: {
+    color: '#fff'
+  },
   label: {
+    color: '#fff',
     fontWeight: 'bold'
   }
 });
@@ -38,20 +42,28 @@ export default function BookDetailsList({
         <Typography variant="body1" className={classes.label}>
           Created At:
         </Typography>
-        <Typography variant="body2">{creationDate}</Typography>
+        <Typography variant="body2" className={classes.text}>
+          {creationDate}
+        </Typography>
       </li>
       <li className={classes.listItem}>
         <Typography variant="body1" className={classes.label}>
           Author:
         </Typography>
-        <Typography variant="body2">{author}</Typography>
+        <Typography variant="body2" className={classes.text}>
+          {author}
+        </Typography>
       </li>
       <li className={classes.listItem}>
         <Typography variant="body1" className={classes.label}>
           Category:
         </Typography>
         <FormControl>
-          <Select value={selectCategory} onChange={handleCategorySelect}>
+          <Select
+            value={selectCategory}
+            onChange={handleCategorySelect}
+            className={classes.text}
+          >
             {categoriesOptions}
           </Select>
         </FormControl>
@@ -60,7 +72,9 @@ export default function BookDetailsList({
         <Typography variant="body1" className={classes.label}>
           Description:
         </Typography>
-        <Typography variant="body2">{description}</Typography>
+        <Typography variant="body2" className={classes.text}>
+          {description}
+        </Typography>
       </li>
     </ul>
   );
