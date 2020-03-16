@@ -1,7 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Box, Button } from '@material-ui/core';
 import { AddComment } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+
+// Actions
+import { showCommentFormModal } from '../../redux/actions/uiActions';
 
 // Components
 import Comment from './Comment';
@@ -25,8 +29,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CommentsList({ bookComments }) {
+export default function CommentsList({ bookId, bookComments }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const handleAddNewCommentButtonClick = () => {
+    dispatch(showCommentFormModal('add', bookId));
+  };
 
   return (
     <Box className={classes.container}>
@@ -37,6 +46,7 @@ export default function CommentsList({ bookComments }) {
         variant="contained"
         startIcon={<AddComment />}
         className={classes.addCommentButton}
+        onClick={handleAddNewCommentButtonClick}
       >
         {bookComments.length
           ? 'Share your thought too!'

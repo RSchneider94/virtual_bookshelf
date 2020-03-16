@@ -64,12 +64,18 @@ export const closeBookFormModal = () => {
   };
 };
 
-export const showCommentFormModal = actionType => {
+export const showCommentFormModal = (actionType, parentId) => {
+  /*
+    @param actionType: 'add' or 'edit'
+    @param parentId: in case of 'add' for actionType it will be the id of the parent book,
+      but if it's to edit book we handle it as commentId in reducers
+  */
   return dispatch => {
     dispatch({
       type: actionTypes.SHOW_COMMENT_FORM_MODAL,
       payload: {
-        actionType
+        actionType,
+        parentId
       }
     });
   };

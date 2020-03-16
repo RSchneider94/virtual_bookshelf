@@ -95,45 +95,47 @@ export default function BookFormModal() {
               ? 'Add a new book to your Virtual Bookshelf.'
               : 'Edit the book in your Virtual Bookshelf'}
           </DialogContentText>
-          <TextField
-            required
-            id="input-book-title"
-            type="text"
-            label="Title"
-            placeholder="Insert the title"
-            className={classes.formControl}
-          />
-          <TextField
-            required
-            id="input-book-author"
-            type="text"
-            label="Author"
-            placeholder="Insert the author"
-            className={classes.formControl}
-          />
-          <FormControl className={classes.formControl}>
-            <InputLabel id="input-book-category-label">Category</InputLabel>
-            <Select
+          <form autoComplete="false">
+            <TextField
               required
-              labelId="input-book-category-label"
-              id="input-book-category"
-              value={selectCategory}
-              onChange={handleCategorySelect}
-            >
-              {categoriesOptions}
-            </Select>
-          </FormControl>
-          <TextField
-            rowsMax="20"
-            fullWidth
-            multiline
-            required
-            id="input-book-description"
-            type="textarea"
-            label="Description"
-            placeholder="Insert the description"
-            className={classes.formControl}
-          />
+              id="input-book-title"
+              type="text"
+              label="Title"
+              placeholder="Insert the title"
+              className={classes.formControl}
+            />
+            <TextField
+              required
+              id="input-book-author"
+              type="text"
+              label="Author"
+              placeholder="Insert the author"
+              className={classes.formControl}
+            />
+            <FormControl className={classes.formControl}>
+              <InputLabel id="input-book-category-label">Category</InputLabel>
+              <Select
+                required
+                labelId="input-book-category-label"
+                id="input-book-category"
+                value={selectCategory}
+                onChange={handleCategorySelect}
+              >
+                {categoriesOptions}
+              </Select>
+            </FormControl>
+            <TextField
+              rowsMax="20"
+              fullWidth
+              multiline
+              required
+              id="input-book-description"
+              type="textarea"
+              label="Description"
+              placeholder="Insert the description"
+              className={classes.formControl}
+            />
+          </form>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

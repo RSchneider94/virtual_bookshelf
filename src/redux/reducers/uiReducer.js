@@ -14,12 +14,13 @@ const initialState = {
     itemId: ''
   },
   bookFormModal: {
-    isModalOpen: true,
+    isModalOpen: false,
     actionType: ''
   },
   commentFormModal: {
     isModalOpen: false,
-    actionType: ''
+    actionType: '',
+    parentId: undefined
   }
 };
 
@@ -86,7 +87,8 @@ export default function uiReducer(state = initialState, action) {
         ...state,
         commentFormModal: {
           isModalOpen: true,
-          actionType: action.payload.actionType
+          actionType: action.payload.actionType,
+          parentId: action.payload.parentId
         }
       };
     case actionTypes.CLOSE_COMMENT_FORM_MODAL:
@@ -94,7 +96,8 @@ export default function uiReducer(state = initialState, action) {
         ...state,
         commentFormModal: {
           isModalOpen: false,
-          actionType: ''
+          actionType: '',
+          parentId: undefined
         }
       };
     default:

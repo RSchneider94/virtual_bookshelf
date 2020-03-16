@@ -126,7 +126,10 @@ export default function BookDetails() {
           </IconButton>
         </Box>
         <Box className={classes.comments}>
-          <CommentsList bookComments={bookComments}></CommentsList>
+          <CommentsList
+            bookId={book.id}
+            bookComments={bookComments}
+          ></CommentsList>
         </Box>
       </Box>
     );

@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,16 +7,16 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Actions
 import { closeCommentFormModal } from '../../redux/actions/uiActions';
+import { addComment } from '../../redux/actions/commentsActions';
 import { showFeedbackPopup } from '../../redux/actions/uiActions';
+
+// Context
+import { UserContext } from '../../context/userContext';
 
 const useStyles = makeStyles({
   listItem: {
@@ -41,17 +41,29 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export default function CommentFormModal() {
   const classes = useStyles();
-  const { isModalOpen, actionType } = useSelector(
+  const { isModalOpen, actionType, parentId } = useSelector(
     state => state.ui.commentFormModal
   );
+  const user = useContext(UserContext);
   const dispatch = useDispatch();
+
+  const [comment, setComment] = useState('');
+
+  const handleInputChange = e => {
+    setComment(e.target.value);
+  };
 
   const handleClose = () => {
     dispatch(closeCommentFormModal());
   };
 
-  const handleConfirmation = () => {
-    dispatch(closeCommentFormModal());
+  const handleAddNewCommentSubmit = () => {
+    dispatch(addComment(parentId, comment, user));
+    setComment('');
+    handleClose();
+    dispatch(
+      showFeedbackPopup('success', 'The comment was successfully added!')
+    );
   };
 
   return (
@@ -75,23 +87,28 @@ export default function CommentFormModal() {
               ? 'Add a new comment to this book.'
               : 'Edit the comment to this book'}
           </DialogContentText>
-          <TextField
-            rowsMax="40"
-            fullWidth
-            multiline
-            required
-            id="input-comment"
-            type="textarea"
-            label="Comment"
-            placeholder="Write your comment, be creative! ✏️"
-            className={classes.formControl}
-          />
+          <form autoComplete="false">
+            <TextField
+              rows="2"
+              rowsMax="40"
+              fullWidth
+              multiline
+              required
+              id="input-comment"
+              type="textarea"
+              label="Comment"
+              placeholder="Write your comment, be creative! ✏️"
+              value={comment}
+              className={classes.formControl}
+              onChange={handleInputChange}
+            />
+          </form>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleConfirmation} color="primary">
+          <Button onClick={handleAddNewCommentSubmit} color="primary">
             {actionType === 'add' ? 'Insert' : 'Save'}
           </Button>
         </DialogActions>

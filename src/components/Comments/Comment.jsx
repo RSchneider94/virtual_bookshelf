@@ -11,7 +11,10 @@ import { Edit, Delete } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Actions
-import { showConfirmationModal } from '../../redux/actions/uiActions';
+import {
+  showConfirmationModal,
+  showCommentFormModal
+} from '../../redux/actions/uiActions';
 
 const useStyles = makeStyles({
   container: {
@@ -31,13 +34,17 @@ export default function Comment(props) {
   const { id, author, creationDate, body } = props;
   const dispatch = useDispatch();
 
-  const handleDeleteCommentConfirmClick = itemId => () => {
+  const handleEditCommentClick = commentId => () => {
+    dispatch(showCommentFormModal('edit', commentId));
+  };
+
+  const handleDeleteCommentConfirmClick = commentId => () => {
     dispatch(
       showConfirmationModal(
         'Comment Deletion',
         'Are you sure you want to remove this comment?',
         'comment',
-        itemId
+        commentId
       )
     );
   };
@@ -53,7 +60,11 @@ export default function Comment(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton title="Edit this comment" aria-label="edit the comment">
+        <IconButton
+          title="Edit this comment"
+          aria-label="edit the comment"
+          onClick={handleEditCommentClick(id)}
+        >
           <Edit></Edit>
         </IconButton>
         <IconButton
