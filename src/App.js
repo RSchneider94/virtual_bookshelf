@@ -12,6 +12,8 @@ import store from './redux/store';
 
 // UI Components
 import Header from './components/UI/Header';
+import BookFormModal from './components/UI/BookFormModal';
+import CommentFormModal from './components/UI/CommentFormModal';
 import ConfirmationModal from './components/UI/ConfirmationModal';
 import FeedbackPopup from './components/UI/FeedbackPopup';
 
@@ -33,6 +35,8 @@ function App() {
       <UserProvider>
         <Header></Header>
         <Container className={classes.root}>
+          <BookFormModal></BookFormModal>
+          <CommentFormModal></CommentFormModal>
           <ConfirmationModal></ConfirmationModal>
           <FeedbackPopup></FeedbackPopup>
           <Switch>

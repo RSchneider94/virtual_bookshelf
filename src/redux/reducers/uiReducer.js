@@ -12,6 +12,14 @@ const initialState = {
     modalContent: '',
     itemToDelete: '',
     itemId: ''
+  },
+  bookFormModal: {
+    isModalOpen: true,
+    actionType: ''
+  },
+  commentFormModal: {
+    isModalOpen: false,
+    actionType: ''
   }
 };
 
@@ -55,6 +63,38 @@ export default function uiReducer(state = initialState, action) {
           isPopupOpen: false,
           popupSeverity: 'success',
           popupContent: ''
+        }
+      };
+    case actionTypes.SHOW_BOOK_FORM_MODAL:
+      return {
+        ...state,
+        bookFormModal: {
+          isModalOpen: true,
+          actionType: action.payload.actionType
+        }
+      };
+    case actionTypes.CLOSE_BOOK_FORM_MODAL:
+      return {
+        ...state,
+        bookFormModal: {
+          isModalOpen: false,
+          actionType: ''
+        }
+      };
+    case actionTypes.SHOW_COMMENT_FORM_MODAL:
+      return {
+        ...state,
+        commentFormModal: {
+          isModalOpen: true,
+          actionType: action.payload.actionType
+        }
+      };
+    case actionTypes.CLOSE_COMMENT_FORM_MODAL:
+      return {
+        ...state,
+        commentFormModal: {
+          isModalOpen: false,
+          actionType: ''
         }
       };
     default:
