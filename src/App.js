@@ -18,6 +18,7 @@ import FeedbackPopup from './components/UI/FeedbackPopup';
 // Screens
 import Home from './screens/Home';
 import BookDetails from './screens/BookDetails';
+import CategoryView from './screens/CategoryView';
 
 const useStyles = makeStyles({
   root: {
@@ -40,6 +41,9 @@ function App() {
             </Route>
             <Route exact path="/books/:bookId">
               <BookDetails></BookDetails>
+            </Route>
+            <Route exact path="/categories/:categoryId">
+              <CategoryView></CategoryView>
             </Route>
           </Switch>
         </Container>
