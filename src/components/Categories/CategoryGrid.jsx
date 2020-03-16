@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function CategoryView({ categoryKey, categoryName }) {
+export default function CategoryGrid({ categoryKey, categoryName }) {
   const classes = useStyles();
 
   const booksInCategory = useSelector(state => {

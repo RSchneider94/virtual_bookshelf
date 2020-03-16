@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import CategoryView from '../components/Categories/CategoryView';
+import CategoryGrid from '../components/Categories/CategoryGrid';
 
 export default function Home() {
   const categories = useSelector(state => state.categories);
@@ -10,7 +10,7 @@ export default function Home() {
 
   for (const [categoryKey, value] of Object.entries(categories)) {
     categoriesSections.push(
-      <CategoryView
+      <CategoryGrid
         key={categoryKey}
         categoryKey={categoryKey}
         categoryName={value}
