@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { Box } from '@material-ui/core';
 import CategoryGrid from '../components/Categories/CategoryGrid';
 
 export default function Home() {
@@ -18,5 +19,5 @@ export default function Home() {
     );
   }
 
-  return categoriesSections;
+  return <Box>{categoriesSections}</Box>;
 }

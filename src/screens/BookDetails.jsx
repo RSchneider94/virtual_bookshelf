@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, IconButton } from '@material-ui/core';
-import { Edit, Delete } from '@material-ui/icons';
+import { Edit, Delete, ArrowBack } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,7 +16,7 @@ import {
 import BookCover from '../components/Books/BookCover';
 import BookDetailsList from '../components/Books/BookDetailsList';
 import CommentsList from '../components/Comments/CommentsList';
-import ReturnHomePageButton from '../components/UI/ReturnHomePageButton';
+import ButtonWithIcon from '../components/UI/ButtonWithIcon';
 import StyledText from '../components/UI/StyledText';
 
 const useStyles = makeStyles(theme => ({
@@ -153,7 +153,13 @@ export default function BookDetails() {
           😔
         </span>
       </StyledText>
-      <ReturnHomePageButton></ReturnHomePageButton>
+      <ButtonWithIcon
+        icon={<ArrowBack></ArrowBack>}
+        text="Return to Home Page"
+        clickHandler={() => {
+          window.location.pathname = '/';
+        }}
+      ></ButtonWithIcon>
     </Box>
   );
 }

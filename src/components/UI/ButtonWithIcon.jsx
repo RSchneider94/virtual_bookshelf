@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { ArrowBack } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   returnButton: {
@@ -9,21 +8,17 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ReturnHomePageButton() {
+export default function ButtonWithIcon({ icon, text, clickHandler }) {
   const classes = useStyles();
-
-  const handleClick = () => {
-    window.location.pathname = '/';
-  };
 
   return (
     <Button
       variant="contained"
       className={classes.returnButton}
-      startIcon={<ArrowBack />}
-      onClick={handleClick}
+      startIcon={icon}
+      onClick={clickHandler}
     >
-      Return to Home Page
+      {text}
     </Button>
   );
 }

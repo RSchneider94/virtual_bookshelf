@@ -2,11 +2,12 @@ import React from 'react';
 import { useStore } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Box } from '@material-ui/core';
+import { ArrowBack } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Components
 import CategoryGrid from '../components/Categories/CategoryGrid';
-import ReturnHomePageButton from '../components/UI/ReturnHomePageButton';
+import ButtonWithIcon from '../components/UI/ButtonWithIcon';
 
 const useStyles = makeStyles({
   container: {
@@ -25,7 +26,13 @@ export default function CategoryView() {
         categoryKey={categoryId}
         categoryName={categoryName}
       ></CategoryGrid>
-      <ReturnHomePageButton></ReturnHomePageButton>
+      <ButtonWithIcon
+        icon={<ArrowBack></ArrowBack>}
+        text="Return to Home Page"
+        clickHandler={() => {
+          window.location.pathname = '/';
+        }}
+      ></ButtonWithIcon>
     </Box>
   );
 }
