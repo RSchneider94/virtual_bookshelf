@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Box } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import ButtonWithIcon from '../components/UI/ButtonWithIcon';
+import SortingSelect from '../components/UI/SortingSelect';
 import CategoryGrid from '../components/Categories/CategoryGrid';
 
 // Actions
@@ -33,6 +34,7 @@ export default function Home() {
         text="Add New Book"
         clickHandler={handleAddBookClick}
       ></ButtonWithIcon>
+      <SortingSelect></SortingSelect>
       {categoriesSections}
     </Box>
   );

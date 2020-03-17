@@ -1,6 +1,7 @@
 import { actionTypes } from '../actions/uiActions';
 
 const initialState = {
+  sorting: 'alphabetic',
   feedbackPopup: {
     isPopupOpen: false,
     popupSeverity: 'success',
@@ -132,6 +133,11 @@ export default function uiReducer(state = initialState, action) {
           isModalOpen: false,
           commentId: ''
         }
+      };
+    case actionTypes.CHANGE_SORTING:
+      return {
+        ...state,
+        sorting: action.sorting
       };
     default:
       return state;

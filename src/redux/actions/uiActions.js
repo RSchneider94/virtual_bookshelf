@@ -10,7 +10,8 @@ export const actionTypes = {
   SHOW_ADD_COMMENT_FORM_MODAL: 'SHOW_ADD_COMMENT_FORM_MODAL',
   CLOSE_ADD_COMMENT_FORM_MODAL: 'CLOSE_ADD_COMMENT_FORM_MODAL',
   SHOW_EDIT_COMMENT_FORM_MODAL: 'SHOW_EDIT_COMMENT_FORM_MODAL',
-  CLOSE_EDIT_COMMENT_FORM_MODAL: 'CLOSE_EDIT_COMMENT_FORM_MODAL'
+  CLOSE_EDIT_COMMENT_FORM_MODAL: 'CLOSE_EDIT_COMMENT_FORM_MODAL',
+  CHANGE_SORTING: 'CHANGE_SORTING'
 };
 
 export const showConfirmationModal = (title, content, itemToDelete, itemId) => {
@@ -113,5 +114,11 @@ export const showEditCommentFormModal = commentId => {
 export const closeEditCommentFormModal = () => {
   return dispatch => {
     dispatch({ type: actionTypes.CLOSE_EDIT_COMMENT_FORM_MODAL });
+  };
+};
+
+export const changeSorting = sorting => {
+  return dispatch => {
+    dispatch({ type: actionTypes.CHANGE_SORTING, sorting });
   };
 };

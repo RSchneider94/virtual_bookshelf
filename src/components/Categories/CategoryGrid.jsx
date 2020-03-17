@@ -20,20 +20,39 @@ const useStyles = makeStyles({
   }
 });
 
+const compareSortingFunction = (a, b) => {
+  const titleA = a.title.toUpperCase();
+  const titleB = b.title.toUpperCase();
+
+  if (titleA < titleB) {
+    return -1;
+  }
+
+  if (titleA > titleB) {
+    return 1;
+  }
+
+  return 0;
+};
+
 export default function CategoryGrid({ categoryKey, categoryName }) {
   const classes = useStyles();
 
   const booksInCategory = useSelector(state => {
-    if (categoryKey === 'noCategory') {
-      return state.books.filter(
-        book =>
-          !book.deleted &&
-          (book.category === null || book.category === categoryName)
-      );
+    switch (state.ui.sorting) {
+      case 'alphabetic':
+        return state.books
+          .sort(compareSortingFunction)
+          .filter(book => !book.deleted && book.category === categoryName);
+      case 'creation':
+        return state.books
+          .sort((a, b) => b.creationDate - a.creationDate)
+          .filter(book => !book.deleted && book.category === categoryName);
+      default:
+        return state.books.filter(
+          book => !book.deleted && book.category === categoryName
+        );
     }
-    return state.books.filter(
-      book => !book.deleted && book.category === categoryName
-    );
   });
 
   const bookElements = booksInCategory.map(book => (
