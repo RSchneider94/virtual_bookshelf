@@ -8,3 +8,8 @@ export const generateRandomId = () => {
       .substring(2, 15)
   );
 };
+
+export const formatDate = timeStamp => {
+  const formattedDate = new Date(timeStamp);
+  return formattedDate.toLocaleString();
+};

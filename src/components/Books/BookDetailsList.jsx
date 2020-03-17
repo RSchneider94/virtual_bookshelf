@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Typography, FormControl, Select, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { formatDate } from '../../utils/utils';
 
 const useStyles = makeStyles({
   listItem: {
@@ -43,7 +44,7 @@ export default function BookDetailsList({
           Created At:
         </Typography>
         <Typography variant="body2" className={classes.text}>
-          {creationDate}
+          {formatDate(creationDate)}
         </Typography>
       </li>
       <li className={classes.listItem}>

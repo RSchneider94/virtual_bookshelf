@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import { Edit, Delete } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import { formatDate } from '../../utils/utils';
 
 // Actions
 import {
@@ -53,7 +54,7 @@ export default function Comment(props) {
     <Card className={classes.container}>
       <CardContent>
         <small>
-          Written by {author} on {creationDate}:
+          Written by {author} on {formatDate(creationDate)}:
         </small>
         <Typography variant="body1" className={classes.commentBody}>
           {body}

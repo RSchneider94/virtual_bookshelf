@@ -15,6 +15,7 @@ import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Actions
+import { addBook } from '../../redux/actions/booksActions';
 import { closeAddBookFormModal } from '../../redux/actions/uiActions';
 import { showFeedbackPopup } from '../../redux/actions/uiActions';
 
@@ -58,10 +59,37 @@ export default function AddBookFormModal() {
   }
 
   // Used for selector element to change the book's category
-  const [selectCategory, setSelectCategory] = useState('No Category');
+  // Persisted State
+  const [formData, setFormData] = useState({
+    title: '',
+    author: '',
+    category: '',
+    description: ''
+  });
+  const [validationErrors, setValidationErrors] = useState({
+    title: true,
+    author: true,
+    category: true,
+    description: true
+  });
 
-  const handleCategorySelect = event => {
-    setSelectCategory(event.target.value);
+  // Handles
+  const handleInputChange = event => {
+    if (event.target.value.length && event.target.value !== '') {
+      setValidationErrors({
+        ...validationErrors,
+        [event.target.name]: false
+      });
+    } else {
+      setValidationErrors({
+        ...validationErrors,
+        [event.target.name]: true
+      });
+    }
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    });
   };
 
   const handleClose = () => {
@@ -69,7 +97,18 @@ export default function AddBookFormModal() {
   };
 
   const handleConfirmation = () => {
-    dispatch(closeAddBookFormModal());
+    if (Object.values(validationErrors).some(Boolean)) {
+      return 0;
+    }
+    dispatch(addBook({ ...formData }));
+    setFormData({
+      title: '',
+      author: '',
+      category: '',
+      description: ''
+    });
+    handleClose();
+    dispatch(showFeedbackPopup('success', 'The book was successfully added!'));
   };
 
   return (
@@ -92,28 +131,43 @@ export default function AddBookFormModal() {
           <form autoComplete="false">
             <TextField
               required
+              error={validationErrors.title}
               id="input-book-title"
+              name="title"
               type="text"
               label="Title"
               placeholder="Insert the title"
+              value={formData.title}
               className={classes.formControl}
+              onChange={handleInputChange}
             />
             <TextField
               required
+              error={validationErrors.author}
               id="input-book-author"
+              name="author"
               type="text"
               label="Author"
               placeholder="Insert the author"
+              value={formData.author}
               className={classes.formControl}
+              onChange={handleInputChange}
             />
             <FormControl className={classes.formControl}>
-              <InputLabel id="input-book-category-label">Category</InputLabel>
+              <InputLabel
+                id="input-book-category-label"
+                style={{ top: formData.category ? '' : '-15px' }}
+              >
+                Category
+              </InputLabel>
               <Select
                 required
+                error={validationErrors.category}
                 labelId="input-book-category-label"
                 id="input-book-category"
-                value={selectCategory}
-                onChange={handleCategorySelect}
+                name="category"
+                value={formData.category}
+                onChange={handleInputChange}
               >
                 {categoriesOptions}
               </Select>
@@ -123,11 +177,15 @@ export default function AddBookFormModal() {
               fullWidth
               multiline
               required
+              error={validationErrors.description}
               id="input-book-description"
+              name="description"
               type="textarea"
               label="Description"
               placeholder="Insert the description"
+              value={formData.description}
               className={classes.formControl}
+              onChange={handleInputChange}
             />
           </form>
         </DialogContent>

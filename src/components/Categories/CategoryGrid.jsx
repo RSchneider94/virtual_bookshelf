@@ -8,7 +8,7 @@ import BookCover from '../Books/BookCover';
 
 const useStyles = makeStyles({
   title: {
-    marginTop: 60,
+    marginTop: 50,
     marginBottom: 20,
     color: '#fff',
     textAlign: 'center',

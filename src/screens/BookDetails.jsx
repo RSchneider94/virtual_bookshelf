@@ -71,13 +71,13 @@ export default function BookDetails() {
 
   // Get the book we are sending in param
   const book = useSelector(state =>
-    state.books.find(book => book.id === parseInt(bookId))
+    state.books.find(book => book.id === bookId)
   );
 
   // And their comments
   const bookComments = useSelector(state =>
     state.comments.filter(
-      comment => comment.parentId === parseInt(bookId) && !comment.deleted
+      comment => comment.parentId === bookId && !comment.deleted
     )
   );
 

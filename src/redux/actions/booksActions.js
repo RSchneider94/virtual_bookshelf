@@ -5,7 +5,7 @@ export const actionTypes = {
   CHANGE_BOOK_CATEGORY: 'CHANGE_BOOK_CATEGORY'
 };
 
-export const addBook = (title, description, author, category) => {
+export const addBook = ({ title, description, author, category }) => {
   return dispatch => {
     dispatch({
       type: actionTypes.ADD_BOOK,

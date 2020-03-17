@@ -54,9 +54,9 @@ export default function CommentsList({ bookId, bookComments }) {
       </Button>
       <Box className={classes.commentsSection}>
         {bookComments.length ? (
-          bookComments.map(comment => (
-            <Comment key={comment.id} {...comment}></Comment>
-          ))
+          bookComments
+            .sort((a, b) => b.creationDate - a.creationDate)
+            .map(comment => <Comment key={comment.id} {...comment}></Comment>)
         ) : (
           <StyledText variant="body1" color="#fff">
             No comments for this book yet. Wanna share your thoughts?{' '}

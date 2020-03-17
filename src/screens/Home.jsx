@@ -1,14 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Box } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
+import ButtonWithIcon from '../components/UI/ButtonWithIcon';
 import CategoryGrid from '../components/Categories/CategoryGrid';
 
+// Actions
+import { showAddBookFormModal } from '../redux/actions/uiActions';
+
 export default function Home() {
+  const dispatch = useDispatch();
   const categories = useSelector(state => state.categories);
 
   const categoriesSections = [];
-
   for (const [categoryKey, value] of Object.entries(categories)) {
     categoriesSections.push(
       <CategoryGrid
@@ -19,5 +24,16 @@ export default function Home() {
     );
   }
 
-  return <Box>{categoriesSections}</Box>;
+  const handleAddBookClick = () => dispatch(showAddBookFormModal());
+
+  return (
+    <Box>
+      <ButtonWithIcon
+        icon={<Add></Add>}
+        text="Add New Book"
+        clickHandler={handleAddBookClick}
+      ></ButtonWithIcon>
+      {categoriesSections}
+    </Box>
+  );
 }
