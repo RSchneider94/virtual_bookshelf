@@ -18,19 +18,11 @@ node v12.15.0 (npm)
 2. navigate to the project's folder with `cd foldername`
 3. run `npm install`
 4. after all the dependencies are installed run `npm run`
-5. run it accessing:
+5. run it accessing: `http://localhost:3000`
 
 ## Running the tests
 
 TBD
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Versioning
 
@@ -39,7 +31,3 @@ Give an example
 ## Authors
 
 - **Rodrigo Schneider** - [RSchneider94](https://github.com/RSchneider94)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
