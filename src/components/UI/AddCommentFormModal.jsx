@@ -55,7 +55,7 @@ export default function AddCommentFormModal() {
 
   // Handles
   const handleInputChange = e => {
-    if (e.target.value.length || '') {
+    if (e.target.value.length) {
       setCommentValidationError(false);
     } else {
       setCommentValidationError(true);
