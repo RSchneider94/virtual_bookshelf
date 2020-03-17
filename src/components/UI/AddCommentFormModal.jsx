@@ -11,7 +11,7 @@ import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Actions
-import { closeCommentFormModal } from '../../redux/actions/uiActions';
+import { closeAddCommentFormModal } from '../../redux/actions/uiActions';
 import { addComment } from '../../redux/actions/commentsActions';
 import { showFeedbackPopup } from '../../redux/actions/uiActions';
 
@@ -39,10 +39,10 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CommentFormModal() {
+export default function AddCommentFormModal() {
   const classes = useStyles();
-  const { isModalOpen, actionType, parentId } = useSelector(
-    state => state.ui.commentFormModal
+  const { isModalOpen, parentId } = useSelector(
+    state => state.ui.addCommentFormModal
   );
   const user = useContext(UserContext);
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ export default function CommentFormModal() {
   };
 
   const handleClose = () => {
-    dispatch(closeCommentFormModal());
+    dispatch(closeAddCommentFormModal());
   };
 
   const handleAddNewCommentSubmit = () => {
@@ -75,17 +75,15 @@ export default function CommentFormModal() {
         onClose={handleClose}
         fullWidth
         maxWidth="md"
-        aria-labelledby="comment-form-modal-title"
-        aria-describedby="comment-form-modal-description"
+        aria-labelledby="add-comment-form-modal-title"
+        aria-describedby="add-comment-form-modal-description"
       >
-        <DialogTitle id="comment-form-modal-title">
-          {actionType === 'add' ? 'Add New Comment' : 'Edit Comment'}
+        <DialogTitle id="add-comment-form-modal-title">
+          Add New Comment
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="comment-form-modal-description">
-            {actionType === 'add'
-              ? 'Add a new comment to this book.'
-              : 'Edit the comment to this book'}
+          <DialogContentText id="add-comment-form-modal-description">
+            Add a new comment to this book.
           </DialogContentText>
           <form autoComplete="false">
             <TextField
@@ -94,7 +92,7 @@ export default function CommentFormModal() {
               fullWidth
               multiline
               required
-              id="input-comment"
+              id="input-add-comment"
               type="textarea"
               label="Comment"
               placeholder="Write your comment, be creative! ✏️"
@@ -109,7 +107,7 @@ export default function CommentFormModal() {
             Cancel
           </Button>
           <Button onClick={handleAddNewCommentSubmit} color="primary">
-            {actionType === 'add' ? 'Insert' : 'Save'}
+            Insert
           </Button>
         </DialogActions>
       </Dialog>

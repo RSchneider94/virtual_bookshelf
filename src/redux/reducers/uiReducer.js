@@ -13,14 +13,16 @@ const initialState = {
     itemToDelete: '',
     itemId: ''
   },
-  bookFormModal: {
-    isModalOpen: false,
-    actionType: ''
+  addBookFormModal: {
+    isModalOpen: false
   },
-  commentFormModal: {
+  addCommentFormModal: {
     isModalOpen: false,
-    actionType: '',
-    parentId: undefined
+    parentId: ''
+  },
+  editCommentFormModal: {
+    isModalOpen: false,
+    commentId: ''
   }
 };
 
@@ -66,38 +68,50 @@ export default function uiReducer(state = initialState, action) {
           popupContent: ''
         }
       };
-    case actionTypes.SHOW_BOOK_FORM_MODAL:
+    case actionTypes.SHOW_ADD_BOOK_FORM_MODAL:
       return {
         ...state,
-        bookFormModal: {
-          isModalOpen: true,
-          actionType: action.payload.actionType
+        addBookFormModal: {
+          isModalOpen: true
         }
       };
-    case actionTypes.CLOSE_BOOK_FORM_MODAL:
+    case actionTypes.CLOSE_ADD_BOOK_FORM_MODAL:
       return {
         ...state,
-        bookFormModal: {
-          isModalOpen: false,
-          actionType: ''
+        addBookFormModal: {
+          isModalOpen: false
         }
       };
-    case actionTypes.SHOW_COMMENT_FORM_MODAL:
+    case actionTypes.SHOW_ADD_COMMENT_FORM_MODAL:
       return {
         ...state,
-        commentFormModal: {
+        addCommentFormModal: {
           isModalOpen: true,
-          actionType: action.payload.actionType,
           parentId: action.payload.parentId
         }
       };
-    case actionTypes.CLOSE_COMMENT_FORM_MODAL:
+    case actionTypes.CLOSE_ADD_COMMENT_FORM_MODAL:
       return {
         ...state,
-        commentFormModal: {
+        addCommentFormModal: {
           isModalOpen: false,
-          actionType: '',
-          parentId: undefined
+          parentId: ''
+        }
+      };
+    case actionTypes.SHOW_EDIT_COMMENT_FORM_MODAL:
+      return {
+        ...state,
+        editCommentFormModal: {
+          isModalOpen: true,
+          commentId: action.payload.commentId
+        }
+      };
+    case actionTypes.CLOSE_EDIT_COMMENT_FORM_MODAL:
+      return {
+        ...state,
+        editCommentFormModal: {
+          isModalOpen: false,
+          commentId: ''
         }
       };
     default:

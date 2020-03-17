@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // Actions
 import {
   showConfirmationModal,
-  showCommentFormModal
+  showEditCommentFormModal
 } from '../../redux/actions/uiActions';
 
 const useStyles = makeStyles({
@@ -35,7 +35,7 @@ export default function Comment(props) {
   const dispatch = useDispatch();
 
   const handleEditCommentClick = commentId => () => {
-    dispatch(showCommentFormModal('edit', commentId));
+    dispatch(showEditCommentFormModal(commentId));
   };
 
   const handleDeleteCommentConfirmClick = commentId => () => {

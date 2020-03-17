@@ -15,7 +15,7 @@ import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Actions
-import { closeBookFormModal } from '../../redux/actions/uiActions';
+import { closeAddBookFormModal } from '../../redux/actions/uiActions';
 import { showFeedbackPopup } from '../../redux/actions/uiActions';
 
 const useStyles = makeStyles({
@@ -39,11 +39,9 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function BookFormModal() {
+export default function AddBookFormModal() {
   const classes = useStyles();
-  const { isModalOpen, actionType } = useSelector(
-    state => state.ui.bookFormModal
-  );
+  const { isModalOpen } = useSelector(state => state.ui.addBookFormModal);
   const dispatch = useDispatch();
 
   // Get predefined categories from state
@@ -67,11 +65,11 @@ export default function BookFormModal() {
   };
 
   const handleClose = () => {
-    dispatch(closeBookFormModal());
+    dispatch(closeAddBookFormModal());
   };
 
   const handleConfirmation = () => {
-    dispatch(closeBookFormModal());
+    dispatch(closeAddBookFormModal());
   };
 
   return (
@@ -86,14 +84,10 @@ export default function BookFormModal() {
         aria-labelledby="book-form-modal-title"
         aria-describedby="book-form-modal-description"
       >
-        <DialogTitle id="book-form-modal-title">
-          {actionType === 'add' ? 'Add New Book' : 'Edit Book'}
-        </DialogTitle>
+        <DialogTitle id="book-form-modal-title">Add New Book</DialogTitle>
         <DialogContent>
           <DialogContentText id="book-form-modal-description">
-            {actionType === 'add'
-              ? 'Add a new book to your Virtual Bookshelf.'
-              : 'Edit the book in your Virtual Bookshelf'}
+            Add a new book to your Virtual Bookshelf.
           </DialogContentText>
           <form autoComplete="false">
             <TextField
@@ -142,7 +136,7 @@ export default function BookFormModal() {
             Cancel
           </Button>
           <Button onClick={handleConfirmation} color="primary">
-            {actionType === 'add' ? 'Add' : 'Save'}
+            Add
           </Button>
         </DialogActions>
       </Dialog>

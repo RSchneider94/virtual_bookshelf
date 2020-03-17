@@ -3,10 +3,12 @@ export const actionTypes = {
   CLOSE_CONFIRMATION_MODAL: 'CLOSE_CONFIRMATION_MODAL',
   SHOW_FEEDBACK_POPUP: 'SHOW_FEEDBACK_POPUP',
   CLEAR_FEEDBACK_POPUP: 'CLEAR_FEEDBACK_POPUP',
-  SHOW_BOOK_FORM_MODAL: 'SHOW_BOOK_FORM_MODAL',
-  CLOSE_BOOK_FORM_MODAL: 'CLOSE_BOOK_FORM_MODAL',
-  SHOW_COMMENT_FORM_MODAL: 'SHOW_COMMENT_FORM_MODAL',
-  CLOSE_COMMENT_FORM_MODAL: 'CLOSE_COMMENT_FORM_MODAL'
+  SHOW_ADD_BOOK_FORM_MODAL: 'SHOW_ADD_BOOK_FORM_MODAL',
+  CLOSE_ADD_BOOK_FORM_MODAL: 'CLOSE_ADD_BOOK_FORM_MODAL',
+  SHOW_ADD_COMMENT_FORM_MODAL: 'SHOW_ADD_COMMENT_FORM_MODAL',
+  CLOSE_ADD_COMMENT_FORM_MODAL: 'CLOSE_ADD_COMMENT_FORM_MODAL',
+  SHOW_EDIT_COMMENT_FORM_MODAL: 'SHOW_EDIT_COMMENT_FORM_MODAL',
+  CLOSE_EDIT_COMMENT_FORM_MODAL: 'CLOSE_EDIT_COMMENT_FORM_MODAL'
 };
 
 export const showConfirmationModal = (title, content, itemToDelete, itemId) => {
@@ -47,42 +49,50 @@ export const clearFeedbackPopup = () => {
   };
 };
 
-export const showBookFormModal = actionType => {
+export const showAddBookFormModal = () => {
   return dispatch => {
     dispatch({
-      type: actionTypes.SHOW_BOOK_FORM_MODAL,
-      payload: {
-        actionType
-      }
+      type: actionTypes.SHOW_ADD_BOOK_FORM_MODAL
     });
   };
 };
 
-export const closeBookFormModal = () => {
+export const closeAddBookFormModal = () => {
   return dispatch => {
-    dispatch({ type: actionTypes.CLOSE_BOOK_FORM_MODAL });
+    dispatch({ type: actionTypes.CLOSE_ADD_BOOK_FORM_MODAL });
   };
 };
 
-export const showCommentFormModal = (actionType, parentId) => {
-  /*
-    @param actionType: 'add' or 'edit'
-    @param parentId: in case of 'add' for actionType it will be the id of the parent book,
-      but if it's to edit book we handle it as commentId in reducers
-  */
+export const showAddCommentFormModal = parentId => {
   return dispatch => {
     dispatch({
-      type: actionTypes.SHOW_COMMENT_FORM_MODAL,
+      type: actionTypes.SHOW_ADD_COMMENT_FORM_MODAL,
       payload: {
-        actionType,
         parentId
       }
     });
   };
 };
 
-export const closeCommentFormModal = () => {
+export const closeAddCommentFormModal = () => {
   return dispatch => {
-    dispatch({ type: actionTypes.CLOSE_COMMENT_FORM_MODAL });
+    dispatch({ type: actionTypes.CLOSE_ADD_COMMENT_FORM_MODAL });
+  };
+};
+
+export const showEditCommentFormModal = commentId => {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.SHOW_EDIT_COMMENT_FORM_MODAL,
+      payload: {
+        commentId
+      }
+    });
+  };
+};
+
+export const closeEditCommentFormModal = () => {
+  return dispatch => {
+    dispatch({ type: actionTypes.CLOSE_EDIT_COMMENT_FORM_MODAL });
   };
 };

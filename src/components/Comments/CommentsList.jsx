@@ -5,7 +5,7 @@ import { AddComment } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Actions
-import { showCommentFormModal } from '../../redux/actions/uiActions';
+import { showAddCommentFormModal } from '../../redux/actions/uiActions';
 
 // Components
 import Comment from './Comment';
@@ -34,7 +34,7 @@ export default function CommentsList({ bookId, bookComments }) {
   const dispatch = useDispatch();
 
   const handleAddNewCommentButtonClick = () => {
-    dispatch(showCommentFormModal('add', bookId));
+    dispatch(showAddCommentFormModal(bookId));
   };
 
   return (

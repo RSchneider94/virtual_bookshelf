@@ -12,8 +12,9 @@ import store from './redux/store';
 
 // UI Components
 import Header from './components/UI/Header';
-import BookFormModal from './components/UI/BookFormModal';
-import CommentFormModal from './components/UI/CommentFormModal';
+import AddBookFormModal from './components/UI/AddBookFormModal';
+import AddCommentFormModal from './components/UI/AddCommentFormModal';
+import EditCommentFormModal from './components/UI/EditCommentFormModal';
 import ConfirmationModal from './components/UI/ConfirmationModal';
 import FeedbackPopup from './components/UI/FeedbackPopup';
 
@@ -35,8 +36,9 @@ function App() {
       <UserProvider>
         <Header></Header>
         <Container className={classes.root}>
-          <BookFormModal></BookFormModal>
-          <CommentFormModal></CommentFormModal>
+          <AddBookFormModal></AddBookFormModal>
+          <AddCommentFormModal></AddCommentFormModal>
+          <EditCommentFormModal></EditCommentFormModal>
           <ConfirmationModal></ConfirmationModal>
           <FeedbackPopup></FeedbackPopup>
           <Switch>
