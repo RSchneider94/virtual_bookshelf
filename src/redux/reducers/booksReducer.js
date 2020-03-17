@@ -1,4 +1,6 @@
 import { actionTypes } from '../actions/booksActions';
+import { generateRandomId } from '../../utils/utils';
+
 const initialState = [
   {
     id: 0,
@@ -94,6 +96,29 @@ const initialState = [
 
 export default function books(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.ADD_BOOK:
+      const newBook = {
+        id: generateRandomId(),
+        creationDate: Date.now(),
+        title: action.payload.title,
+        author: action.payload.author,
+        category: action.payload.category,
+        deleted: false
+      };
+      return [...state, newBook];
+    case actionTypes.EDIT_BOOK:
+      return state.map(book => {
+        if (book.id === action.payload.bookId) {
+          return {
+            ...book,
+            title: action.payload.title,
+            author: action.payload.author,
+            category: action.payload.category,
+            description: action.payload.description
+          };
+        }
+        return book;
+      });
     case actionTypes.CHANGE_BOOK_CATEGORY:
       return state.map(book => {
         if (book.id === action.payload.bookId) {

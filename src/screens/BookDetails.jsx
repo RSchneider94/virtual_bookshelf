@@ -7,7 +7,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Actions
 import { changeBookCategory } from '../redux/actions/booksActions';
-import { showConfirmationModal } from '../redux/actions/uiActions';
+import {
+  showConfirmationModal,
+  showEditBookFormModal
+} from '../redux/actions/uiActions';
 
 // Components
 import BookCover from '../components/Books/BookCover';
@@ -88,6 +91,10 @@ export default function BookDetails() {
     dispatch(changeBookCategory(book.id, event.target.value));
   };
 
+  const handleEditBookClick = bookId => () => {
+    dispatch(showEditBookFormModal(bookId));
+  };
+
   const handleDeleteBookConfirmClick = itemId => () => {
     dispatch(
       showConfirmationModal(
@@ -114,7 +121,11 @@ export default function BookDetails() {
           ></BookDetailsList>
         </Box>
         <Box className={classes.bookActions}>
-          <IconButton title="Edit this book" aria-label="edit the book">
+          <IconButton
+            title="Edit this book"
+            aria-label="edit the book"
+            onClick={handleEditBookClick(book.id)}
+          >
             <Edit></Edit>
           </IconButton>
           <IconButton

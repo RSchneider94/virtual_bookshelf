@@ -16,6 +16,10 @@ const initialState = {
   addBookFormModal: {
     isModalOpen: false
   },
+  editBookFormModal: {
+    isModalOpen: false,
+    bookId: ''
+  },
   addCommentFormModal: {
     isModalOpen: false,
     parentId: ''
@@ -79,6 +83,21 @@ export default function uiReducer(state = initialState, action) {
       return {
         ...state,
         addBookFormModal: {
+          isModalOpen: false
+        }
+      };
+    case actionTypes.SHOW_EDIT_BOOK_FORM_MODAL:
+      return {
+        ...state,
+        editBookFormModal: {
+          isModalOpen: true,
+          bookId: action.payload.bookId
+        }
+      };
+    case actionTypes.CLOSE_EDIT_BOOK_FORM_MODAL:
+      return {
+        ...state,
+        editBookFormModal: {
           isModalOpen: false
         }
       };

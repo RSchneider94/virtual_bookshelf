@@ -13,6 +13,7 @@ import store from './redux/store';
 // UI Components
 import Header from './components/UI/Header';
 import AddBookFormModal from './components/UI/AddBookFormModal';
+import EditBookFormModal from './components/UI/EditBookFormModal';
 import AddCommentFormModal from './components/UI/AddCommentFormModal';
 import EditCommentFormModal from './components/UI/EditCommentFormModal';
 import ConfirmationModal from './components/UI/ConfirmationModal';
@@ -37,6 +38,7 @@ function App() {
         <Header></Header>
         <Container className={classes.root}>
           <AddBookFormModal></AddBookFormModal>
+          <EditBookFormModal></EditBookFormModal>
           <AddCommentFormModal></AddCommentFormModal>
           <EditCommentFormModal></EditCommentFormModal>
           <ConfirmationModal></ConfirmationModal>

@@ -5,6 +5,8 @@ export const actionTypes = {
   CLEAR_FEEDBACK_POPUP: 'CLEAR_FEEDBACK_POPUP',
   SHOW_ADD_BOOK_FORM_MODAL: 'SHOW_ADD_BOOK_FORM_MODAL',
   CLOSE_ADD_BOOK_FORM_MODAL: 'CLOSE_ADD_BOOK_FORM_MODAL',
+  SHOW_EDIT_BOOK_FORM_MODAL: 'SHOW_EDIT_BOOK_FORM_MODAL',
+  CLOSE_EDIT_BOOK_FORM_MODAL: 'CLOSE_EDIT_BOOK_FORM_MODAL',
   SHOW_ADD_COMMENT_FORM_MODAL: 'SHOW_ADD_COMMENT_FORM_MODAL',
   CLOSE_ADD_COMMENT_FORM_MODAL: 'CLOSE_ADD_COMMENT_FORM_MODAL',
   SHOW_EDIT_COMMENT_FORM_MODAL: 'SHOW_EDIT_COMMENT_FORM_MODAL',
@@ -60,6 +62,23 @@ export const showAddBookFormModal = () => {
 export const closeAddBookFormModal = () => {
   return dispatch => {
     dispatch({ type: actionTypes.CLOSE_ADD_BOOK_FORM_MODAL });
+  };
+};
+
+export const showEditBookFormModal = bookId => {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.SHOW_EDIT_BOOK_FORM_MODAL,
+      payload: {
+        bookId
+      }
+    });
+  };
+};
+
+export const closeEditBookFormModal = () => {
+  return dispatch => {
+    dispatch({ type: actionTypes.CLOSE_EDIT_BOOK_FORM_MODAL });
   };
 };
 
