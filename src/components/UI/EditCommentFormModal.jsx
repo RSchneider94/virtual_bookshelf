@@ -50,6 +50,7 @@ export default function EditCommentFormModal() {
 
   // Persisted State
   const [comment, setComment] = useState('');
+  const [commentValidationError, setCommentValidationError] = useState(false);
 
   // Watch changes into comment
   useEffect(() => {
@@ -58,6 +59,11 @@ export default function EditCommentFormModal() {
 
   // Handles
   const handleInputChange = e => {
+    if (e.target.value.length) {
+      setCommentValidationError(false);
+    } else {
+      setCommentValidationError(true);
+    }
     setComment(e.target.value);
   };
 
@@ -66,6 +72,9 @@ export default function EditCommentFormModal() {
   };
 
   const handleEditCommentSubmit = () => {
+    if (commentValidationError) {
+      return 0;
+    }
     dispatch(editComment(commentId, comment));
     setComment('');
     handleClose();
@@ -101,10 +110,11 @@ export default function EditCommentFormModal() {
               fullWidth
               multiline
               required
+              error={commentValidationError}
               id="input-edit-comment"
               type="textarea"
               label="Comment"
-              value={comment}
+              value={comment ? comment : ''}
               className={classes.formControl}
               onChange={handleInputChange}
             />

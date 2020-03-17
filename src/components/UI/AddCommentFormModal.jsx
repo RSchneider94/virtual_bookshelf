@@ -41,15 +41,25 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export default function AddCommentFormModal() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const user = useContext(UserContext);
+
+  // Redux State
   const { isModalOpen, parentId } = useSelector(
     state => state.ui.addCommentFormModal
   );
-  const user = useContext(UserContext);
-  const dispatch = useDispatch();
 
+  // Persisted State
   const [comment, setComment] = useState('');
+  const [commentValidationError, setCommentValidationError] = useState(true);
 
+  // Handles
   const handleInputChange = e => {
+    if (e.target.value.length || '') {
+      setCommentValidationError(false);
+    } else {
+      setCommentValidationError(true);
+    }
     setComment(e.target.value);
   };
 
@@ -58,6 +68,9 @@ export default function AddCommentFormModal() {
   };
 
   const handleAddNewCommentSubmit = () => {
+    if (commentValidationError) {
+      return 0;
+    }
     dispatch(addComment(parentId, comment, user));
     setComment('');
     handleClose();
@@ -92,6 +105,7 @@ export default function AddCommentFormModal() {
               fullWidth
               multiline
               required
+              error={commentValidationError}
               id="input-add-comment"
               type="textarea"
               label="Comment"

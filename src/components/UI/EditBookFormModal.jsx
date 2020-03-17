@@ -15,10 +15,7 @@ import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Actions
-import {
-  closeEditBookFormModal,
-  closeAddBookFormModal
-} from '../../redux/actions/uiActions';
+import { closeEditBookFormModal } from '../../redux/actions/uiActions';
 import { editBook } from '../../redux/actions/booksActions';
 import { showFeedbackPopup } from '../../redux/actions/uiActions';
 
@@ -97,7 +94,12 @@ export default function EditBookFormModal() {
 
   // Handles
   const handleInputChange = event => {
-    if (!event.target.value) {
+    if (event.target.value.length) {
+      setValidationErrors({
+        ...validationErrors,
+        [event.target.name]: false
+      });
+    } else {
       setValidationErrors({
         ...validationErrors,
         [event.target.name]: true
