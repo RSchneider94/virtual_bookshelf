@@ -4,8 +4,6 @@ It's a Web Application running just as Front End (localStorage). The idea of the
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
 ```
@@ -20,9 +18,15 @@ node v12.15.0 (npm)
 4. after all the dependencies are installed run `npm run`
 5. run it accessing: `http://localhost:3000`
 
-## Running the tests
+## Tests
 
-TBD
+### Notes
+
+Here I have just writted some "smoke tests" to show the concept and that tests are important and should be implemented. In a real world application (with production goal) I would do more on unit testings and a E2E test.
+
+### Instructions
+
+1. run `npm test`.
 
 ## Versioning
 
