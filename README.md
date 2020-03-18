@@ -2,6 +2,13 @@
 
 It's a Web Application running just as Front End (localStorage). The idea of the application is to give the user a virtual bookshelf, where the user could add, edit and remove books and also comment on books.
 
+### Used technologies
+
+- React (create-react-app)
+- Redux
+- Redux Thunk
+- React Router
+
 ## Getting Started
 
 ### Prerequisites
