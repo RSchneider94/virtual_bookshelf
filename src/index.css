@@ -16,3 +16,8 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+/* GLOBAL RESET MATERIAL UI */
+.MuiTypography-h4 {
+  font-size: 1.5rem !important;
+}

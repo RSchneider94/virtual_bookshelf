@@ -25,7 +25,7 @@ export default function SortingSelect() {
 
   return (
     <Box>
-      <StyledText variant="body2" component="p" color="#fff">
+      <StyledText variant="body2" component="p" color="grey">
         Sort by:
       </StyledText>
       <ToggleButtonGroup

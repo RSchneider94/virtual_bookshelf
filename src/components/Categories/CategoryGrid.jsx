@@ -11,8 +11,7 @@ const useStyles = makeStyles({
     marginTop: 50,
     marginBottom: 20,
     color: '#fff',
-    textAlign: 'center',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.5)'
+    textAlign: 'left'
   },
   noBooksText: {
     textAlign: 'center',
