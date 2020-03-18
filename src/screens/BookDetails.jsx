@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, IconButton } from '@material-ui/core';
 import { Edit, Delete, ArrowBack } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Actions
@@ -68,6 +68,7 @@ export default function BookDetails() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { bookId } = useParams();
+  const history = useHistory();
 
   // Get the book we are sending in param
   const book = useSelector(state =>
@@ -105,6 +106,8 @@ export default function BookDetails() {
       )
     );
   };
+
+  const handleReturnClick = () => history.push('/');
 
   if (book) {
     if (book.deleted) {
@@ -157,9 +160,7 @@ export default function BookDetails() {
         icon={<ArrowBack></ArrowBack>}
         text="Return to Home Page"
         customStyles={{ marginTop: 50 }}
-        clickHandler={() => {
-          window.location.pathname = '/';
-        }}
+        clickHandler={handleReturnClick}
       ></ButtonWithIcon>
     </Box>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,7 +18,10 @@ const useStyles = makeStyles({
 export default function CategoryView() {
   const classes = useStyles();
   const { categoryId } = useParams();
+  const history = useHistory();
   const categoryName = useStore().getState().categories[categoryId];
+
+  const handleReturnClick = () => history.push('/');
 
   return (
     <Box className={classes.container}>
@@ -30,9 +33,7 @@ export default function CategoryView() {
         icon={<ArrowBack></ArrowBack>}
         text="Return to Home Page"
         customStyles={{ marginTop: 50 }}
-        clickHandler={() => {
-          window.location.pathname = '/';
-        }}
+        clickHandler={handleReturnClick}
       ></ButtonWithIcon>
     </Box>
   );
