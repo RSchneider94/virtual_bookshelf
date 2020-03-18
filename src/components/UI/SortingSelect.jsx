@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { FormControl, Select, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { changeSorting } from '../../redux/actions/uiActions';
