@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormControl, Select, MenuItem } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import { SortByAlpha, CalendarToday } from '@material-ui/icons';
+import StyledText from '../UI/StyledText';
 
+// Actions
 import { changeSorting } from '../../redux/actions/uiActions';
-
-const useStyles = makeStyles({
-  select: {
-    backgroundColor: '#fff',
-    lineHeight: '0.1875em'
-  }
-});
 
 export default function SortingSelect() {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const sorting = useSelector(state => state.ui.sorting);
 
   const [sortingValue, setSortingValue] = useState('alphabetic');
@@ -23,22 +19,29 @@ export default function SortingSelect() {
     setSortingValue(sorting);
   }, [sorting]);
 
-  const handleChange = e => {
-    dispatch(changeSorting(e.target.value));
+  const handleChange = (_, value) => {
+    dispatch(changeSorting(value));
   };
 
   return (
-    <FormControl variant="outlined">
-      <Select
-        labelId="select-books-sorting-label"
-        id="select-books-sorting"
-        className={classes.select}
-        value={sortingValue || ''}
+    <Box>
+      <StyledText variant="body2" component="p" color="#fff">
+        Sort by:
+      </StyledText>
+      <ToggleButtonGroup
+        value={sortingValue}
+        size="small"
+        exclusive
         onChange={handleChange}
+        aria-label="books sorting"
       >
-        <MenuItem value="alphabetic">Alphabetic</MenuItem>
-        <MenuItem value="creation">Creation Date</MenuItem>
-      </Select>
-    </FormControl>
+        <ToggleButton value="alphabetic" aria-label="alphabetic">
+          <SortByAlpha />
+        </ToggleButton>
+        <ToggleButton value="creation" aria-label="creation">
+          <CalendarToday />
+        </ToggleButton>
+      </ToggleButtonGroup>
+    </Box>
   );
 }
