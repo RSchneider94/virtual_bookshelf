@@ -29,6 +29,7 @@ export default function CategoryView() {
       <ButtonWithIcon
         icon={<ArrowBack></ArrowBack>}
         text="Return to Home Page"
+        customStyles={{ marginTop: 50 }}
         clickHandler={() => {
           window.location.pathname = '/';
         }}

@@ -156,6 +156,7 @@ export default function BookDetails() {
       <ButtonWithIcon
         icon={<ArrowBack></ArrowBack>}
         text="Return to Home Page"
+        customStyles={{ marginTop: 50 }}
         clickHandler={() => {
           window.location.pathname = '/';
         }}
