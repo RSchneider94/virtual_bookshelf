@@ -51,15 +51,9 @@ export default function AddCommentFormModal() {
 
   // Persisted State
   const [comment, setComment] = useState('');
-  const [commentValidationError, setCommentValidationError] = useState(true);
 
   // Handles
   const handleInputChange = e => {
-    if (e.target.value.length) {
-      setCommentValidationError(false);
-    } else {
-      setCommentValidationError(true);
-    }
     setComment(e.target.value);
   };
 
@@ -68,8 +62,11 @@ export default function AddCommentFormModal() {
   };
 
   const handleAddNewCommentSubmit = () => {
-    if (commentValidationError) {
-      return 0;
+    if (!comment) {
+      dispatch(
+        showFeedbackPopup('error', 'You need to fill all required fields!')
+      );
+      return 1;
     }
     dispatch(addComment(parentId, comment, user));
     setComment('');
@@ -105,7 +102,6 @@ export default function AddCommentFormModal() {
               fullWidth
               multiline
               required
-              error={commentValidationError}
               id="input-add-comment"
               type="textarea"
               label="Comment"

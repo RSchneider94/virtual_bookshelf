@@ -52,12 +52,6 @@ export default function EditBookFormModal() {
     category: '',
     description: ''
   });
-  const [validationErrors, setValidationErrors] = useState({
-    title: false,
-    author: false,
-    category: false,
-    description: false
-  });
 
   // Get predefined categories from state
   const categories = useSelector(state => state.categories);
@@ -94,17 +88,6 @@ export default function EditBookFormModal() {
 
   // Handles
   const handleInputChange = event => {
-    if (event.target.value.length) {
-      setValidationErrors({
-        ...validationErrors,
-        [event.target.name]: false
-      });
-    } else {
-      setValidationErrors({
-        ...validationErrors,
-        [event.target.name]: true
-      });
-    }
     setFormData({
       ...formData,
       [event.target.name]: event.target.value
@@ -116,8 +99,11 @@ export default function EditBookFormModal() {
   };
 
   const handleConfirmation = () => {
-    if (Object.values(validationErrors).some(Boolean)) {
-      return 0;
+    if (!Object.values(formData).every(Boolean)) {
+      dispatch(
+        showFeedbackPopup('error', 'You need to fill all required fields!')
+      );
+      return 1;
     }
     dispatch(editBook(bookId, { ...formData }));
     setFormData({
@@ -150,7 +136,6 @@ export default function EditBookFormModal() {
           <form autoComplete="false">
             <TextField
               required
-              error={validationErrors.title}
               id="input-book-title"
               name="title"
               type="text"
@@ -162,7 +147,6 @@ export default function EditBookFormModal() {
             />
             <TextField
               required
-              error={validationErrors.author}
               id="input-book-author"
               name="author"
               type="text"
@@ -176,7 +160,6 @@ export default function EditBookFormModal() {
               <InputLabel id="input-book-category-label">Category</InputLabel>
               <Select
                 required
-                error={validationErrors.category}
                 labelId="input-book-category-label"
                 id="input-book-category"
                 name="category"
@@ -191,7 +174,6 @@ export default function EditBookFormModal() {
               fullWidth
               multiline
               required
-              error={validationErrors.description}
               id="input-book-description"
               name="description"
               type="textarea"
